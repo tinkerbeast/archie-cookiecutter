@@ -1,0 +1,15 @@
+{
+  "_archetype": "cpp-cmake-simple",
+  "namespace": "org.example",
+  "project": "myProject",
+
+  "__projectLower": "{{ cookiecutter.project.lower() }}",
+  "__cppNamespace": "{{ cookiecutter.namespace.replace('.', '::') }}",
+  "__cmakeNamespace": "{{ cookiecutter.namespace.replace('.', '-') }}",
+  "__cppHeaderGuard": "{{ (cookiecutter.namespace.replace('.', '_') + '__' + cookiecutter.project).upper() }}",
+
+  "project_slug": "{{ (cookiecutter.namespace.replace('.', '_') + '_' + cookiecutter.project).lower() }}",
+
+  "author": "Anonymous",
+  "project_desc": "A simple C++ project"
+}
