@@ -10,28 +10,28 @@ Build behaviour modifying flags
 
 This replaces the `CMAKE_BUILD_TYPE` and provies the same functionality. It also provides additional build types like "Coverage". If `ARCHIE_BUILD_TYPE` is not set, it takes the value from `CMAKE_BUILD_TYPE`. By default `ARCHIE_BUILD_TYPE` is set to "Debug".
 
-### ARCHIE_ENABLE_TESTING
+### ARCHIE_ENABLE_GTEST
 
-This enables unit testing targets and dependencies for the build. The unit testing framework used in this case `GoogleTest`. The reason this exists a configuration flag and not just a build target is to keep test dependencies optional.
+This enables unit testing targets and dependencies for the build. Currently the only unit testing framework integrated is `GoogleTest`. The reason this exists a configuration flag and not just a build target is to keep test dependencies optional.
 
-Archie build targets
---------------------
+Archie make targets
+-------------------
 
 ### all
 
-Default make target which builds libraries and executables. This does not build test executables. This target is augmented by setting `ARCHIE_BUILD_TYPE=Coverage`, in which case all libraries and executables are instrumented with coverage code and linked with coverage libraries.
+Default make target which builds libraries and executables. This **also build test executables** if `ARCHIE_ENABLE_GTEST` is on. This target is augmented by setting `ARCHIE_BUILD_TYPE=Coverage`, in which case all libraries and executables are instrumented with coverage code and linked with coverage libraries.
 
-### test-build
+### test
 
-Builds all test executables. This target is augmented by setting `ARCHIE_BUILD_TYPE=Coverage`, in which case all executables when run will produce Gcov data files.
+Run the test executables via CTest. See https://cmake.org/cmake/help/latest/manual/ctest.1.html for CTest command line options. The `test` target is only available with `ARCHIE_ENABLE_GTEST=ON`. Note that the **binaries must already be built before invcation**.
+
+### all test
+
+Equivalent to invoking `make all` followed by `make test`.
 
 ### clean
 
 Removes all output files (libraries, executables, test executables, generated files, etc).
-
-### test
-
-Run the test executables via CTest. See https://cmake.org/cmake/help/latest/manual/ctest.1.html for CTest command line options. The `test` target is only available with `ARCHIE_ENABLE_TESTING=ON`.
 
 ### coverage
 
