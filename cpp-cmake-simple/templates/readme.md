@@ -19,15 +19,15 @@ Archie make targets
 
 ### all
 
-Default make target which builds libraries and executables. This **also build test executables** if `ARCHIE_ENABLE_GTEST` is on. This target is augmented by setting `ARCHIE_BUILD_TYPE=Coverage`, in which case all libraries and executables are instrumented with coverage code and linked with coverage libraries.
+Default make target which builds libraries and executables. This target is augmented by setting `ARCHIE_BUILD_TYPE=Coverage`, in which case all libraries and executables are instrumented with coverage code and linked with coverage libraries.
 
 ### test
 
 Run the test executables via CTest. See https://cmake.org/cmake/help/latest/manual/ctest.1.html for CTest command line options. The `test` target is only available with `ARCHIE_ENABLE_GTEST=ON`. Note that the **binaries must already be built before invcation**.
 
-### all test
+### check
 
-Equivalent to invoking `make all` followed by `make test`.
+Build tests and run them. This target is only available with `ARCHIE_ENABLE_GTEST=ON`.
 
 ### clean
 

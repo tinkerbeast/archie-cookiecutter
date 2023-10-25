@@ -26,24 +26,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # === Adding individual libraries =============================================
 
-archie_cxx_library_shared("{{cookiecutter.__cmakeNamespace}}" "{{cookiecutter.__projectLower}}"
-  SRCS      ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}.h
-  INCL_PUBL ${CMAKE_CURRENT_SOURCE_DIR}/
-  COPTS     ${ARCHIE_CXX_COPTS}
+archie_cxx_library("{{cookiecutter.__cmakeNamespace}}" "{{cookiecutter.__projectLower}}"
+  SRCS ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}.cpp
+  HDRS_PUBL ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}.h
+  INCLS_PUBL ${CMAKE_CURRENT_SOURCE_DIR}/
+  COPTS_PRIV ${ARCHIE_CXX_COPTS}
 )
 
 archie_cxx_executable("{{cookiecutter.__cmakeNamespace}}" "{{cookiecutter.__projectLower}}-main"
-  SRCS      ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}_main.cpp
+  SRCS ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}_main.cpp
   DEPS_PRIV {{cookiecutter.__cmakeNamespace}}::{{cookiecutter.__projectLower}}
-  COPTS     ${ARCHIE_CXX_COPTS}
+  COPTS_PRIV ${ARCHIE_CXX_COPTS}
 )
 
 if(ARCHIE_ENABLE_GTEST)
   archie_cxx_gtest("{{cookiecutter.__cmakeNamespace}}" "{{cookiecutter.__projectLower}}-test"
-    SRCS      ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}_test.cpp
+    SRCS ${CMAKE_CURRENT_SOURCE_DIR}/{{cookiecutter.__projectLower}}_test.cpp
     DEPS_PRIV {{cookiecutter.__cmakeNamespace}}::{{cookiecutter.__projectLower}}
-    COPTS     ${ARCHIE_CXX_COPTS}
+    COPTS_PRIV ${ARCHIE_CXX_COPTS}
   )
 endif()
 

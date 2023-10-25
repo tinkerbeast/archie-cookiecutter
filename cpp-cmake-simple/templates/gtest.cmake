@@ -16,15 +16,13 @@ if(ARCHIE_ENABLE_GTEST)
   include(GoogleTest)
 
   function(archie_cxx_gtest namespace target)
-    if(NOT TARGET test-build)
-        add_custom_target(test-build)
+    if(NOT TARGET check)
+        add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
     endif()
-    # TODO: EXCLUDE_FROM_ALL or not?
-    #archie_cxx_executable(${namespace} ${target} EXCLUDE_FROM_ALL ${ARGN})
+    archie_cxx_executable(${namespace} ${target} EXCLUDE_FROM_ALL ${ARGN})
     # TODO: combine link libraries and archie_cxx_executable
-    archie_cxx_executable(${namespace} ${target} ${ARGN})
     target_link_libraries("${namespace}-${target}" PRIVATE GTest::gtest_main)
-    add_dependencies(test-build "${namespace}-${target}")
+    add_dependencies(check "${namespace}-${target}")
     gtest_discover_tests("${namespace}-${target}")
     # TODO: remove gtest_add_tests in favour of gtest_discover_tests
     #gtest_add_tests(TARGET "${namespace}-${target}" TEST_PREFIX "${namespace}:")
